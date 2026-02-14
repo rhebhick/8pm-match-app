@@ -1,0 +1,207 @@
+.countdown-timer {
+    text-align: center;
+    padding: var(--spacing-xxl);
+    background: linear-gradient(135deg, rgba(255, 27, 109, 0.1), rgba(255, 16, 240, 0.1));
+    border-color: rgba(255, 16, 240, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.countdown-timer::before {
+    content: '⏰';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.03;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-slow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+.countdown-timer.expired {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(139, 195, 74, 0.2));
+    border-color: rgba(76, 175, 80, 0.5);
+    animation: celebrate 1s ease-in-out;
+}
+
+@keyframes celebrate {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.05);
+    }
+
+    75% {
+        transform: scale(0.98);
+    }
+}
+
+.countdown-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--primary-color), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin: var(--spacing-xl) 0;
+    position: relative;
+    z-index: 1;
+}
+
+.time-unit {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    min-width: 100px;
+    border: 2px solid rgba(255, 105, 180, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.time-unit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.time-unit:hover::before {
+    left: 100%;
+}
+
+.time-unit:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-pink);
+    box-shadow: 0 10px 30px rgba(255, 16, 240, 0.4);
+}
+
+.time-value {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+    animation: number-pulse 1s ease-in-out infinite;
+}
+
+@keyframes number-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.time-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: var(--spacing-xs);
+    font-weight: 600;
+}
+
+.time-separator {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    49%,
+    100% {
+        opacity: 1;
+    }
+
+    50%,
+    99% {
+        opacity: 0.3;
+    }
+}
+
+.countdown-subtitle {
+    margin-top: var(--spacing-lg);
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+}
+
+/* Expired State */
+.countdown-timer.expired .countdown-title {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--love-red), var(--neon-pink), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-flow 3s ease infinite;
+    background-size: 200% 200%;
+}
+
+.countdown-timer.expired .countdown-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    animation: fadeIn 1s ease-out;
+}
+
+@media (max-width: 768px) {
+    .countdown-display {
+        gap: var(--spacing-sm);
+    }
+
+    .time-unit {
+        min-width: 80px;
+        padding: var(--spacing-md);
+    }
+
+    .time-value {
+        font-size: 2rem;
+    }
+
+    .time-separator {
+        font-size: 1.5rem;
+    }
+
+    .countdown-title {
+        font-size: 1.25rem;
+    }
+}
